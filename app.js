@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const exerciseRoutes = require('./api/routes/exercise');
+const weight_trackRoutes = require('./api/routes/weight_track');
 
 mongoose.connect('mongodb+srv://ekim:' + process.env.MONGO_ATLAS_PW + 
     '@cluster0.zrkhj.mongodb.net/wta?retryWrites=true&w=majority', {
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/exercise', exerciseRoutes);
+app.use('/weight_track', weight_trackRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not Found');

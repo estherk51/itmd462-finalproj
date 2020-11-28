@@ -6,6 +6,7 @@ const Exercise = require('../models/exercise_model');
 
 router.get('/', (req, res, next) => {
     Exercise.find()
+        .select('-__v')
         .exec()
         .then(docs => {
             const response = {
@@ -50,7 +51,7 @@ router.post('/', (req, res, next) => {
                     date: result.date
                 },
                 request: {
-                    type: 'GET',
+                    type: 'POST',
                     url: 'http://localhost:3000/exercise'
                 }
             });
@@ -66,6 +67,7 @@ router.post('/', (req, res, next) => {
 router.get('/:exerciseID', (req, res, next) => {
     const id = req.params.exerciseID;
     Exercise.findById(id)
+        .select('-__v')
         .exec()
         .then(doc => {
             res.status(200).json({
@@ -79,7 +81,7 @@ router.get('/:exerciseID', (req, res, next) => {
         .catch(err => {
             console.log(err);
             res.status(500).json({error: err});
-        })
+        });
 });
 
 router.patch('/:exerciseID', (req, res, next) => {
