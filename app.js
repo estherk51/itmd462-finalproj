@@ -4,7 +4,14 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const userRoutes = require('./api/routes/users');
+const exerciseRoutes = require('./api/routes/exercise');
+
+mongoose.connect('mongodb+srv://ekim:' + process.env.MONGO_ATLAS_PW + 
+    '@cluster0.zrkhj.mongodb.net/wta?retryWrites=true&w=majority', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true
+});
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -22,7 +29,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/users', userRoutes);
+app.use('/exercise', exerciseRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not Found');
@@ -30,7 +37,7 @@ app.use((req, res, next) => {
     next(error);
 });
 
-app.use((error, req, res, next) => {
+app.use((req, res, next) => {
     res.status(error.status || 500);
     res.json({
         error: {
