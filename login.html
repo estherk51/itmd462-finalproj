@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
         <title>Login</title>
-        <link rel="stylesheet" type="text/css" >
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
     </head>
     <body>
+        <div class="navContainer">
+            <img src="./images/scale_icon.png" alt="logo" class="logo">
+            <nav>
+                <ul>
+                    <li class="navbar"><a class="navlink" href="index.html">Home</a></li>
+                    <li class="navbar"><a class="navlink" href="weight_track.html">Tracking</a></li>
+                    <li class="navbar"><a class="navlink" href="#">Exercises</a></li>
+                    <li class="navbar"><a class="navlink" href="login.html">Log In</a></li>
+                </ul>
+            </nav>
+        </div>
+
         <div class="login">
             <form id="login" method="get" action="#">
+                <h1>Sign In</h1>
                 <div>
-                    <input type="text" name="username" id="username" placeholder="Username" >
+                    <input type="text" name="username" id="username" placeholder="Username" required>
+                </div>
+                <div> 
+                    <input type="password" name="password" id="password" placeholder="Password">
                 </div>
                 <div>
-                    <input type="password" name="password" placeholder="Password">
-                </div>
-                <div>
-                    <input type="button" name="login" id="button" value="Login!">
+                    <input type="button" name="loginBtn" id="loginBtn" value="Sign in!">
                 </div>
             </form>
         </div>
