@@ -53,7 +53,7 @@ nav a {
     width: 300px;
     margin: auto;
     border-radius: 7px;;
-    margin: 0 auto 0 auto;
+    margin: 25px auto 0 auto;
     box-shadow: 5px 10px 10px black;
     padding: 0px 0px 30px 0px;
     text-align: center;
@@ -85,6 +85,7 @@ nav a {
     background-color: white;
     border-radius: 7px;
     box-shadow: 5px 10px 10px black;
+    margin: 25px auto 0 auto;
 }
 
 #trackForm h2 {
