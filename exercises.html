@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
     <head>
         <meta charset="utf-8">
-        <title>Login</title>
+        <title>Tracking</title>
         <link rel="stylesheet" type="text/css" href="./css/style.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -19,19 +19,29 @@
                 </ul>
             </nav>
         </div>
-        <div class="login">
-            <form id="login" method="get" action="#">
-                <h1>Sign In</h1>
+        <div class="exerciseForm">
+            <form id="exerciseForm" method="GET" action="#">
+                <h1>Enter Your Exercises!</h1>
                 <div>
-                    <input type="text" name="username" id="username" placeholder="Username" required>
-                </div>
-                <div> 
-                    <input type="password" name="password" id="password" placeholder="Password" required>
+                    <label for="exerciseName">Exercise Name:</label>
+                    <input type="text" name="exerciseName" id="exerciseName" required>
                 </div>
                 <div>
-                    <input type="button" name="loginBtn" id="loginBtn" value="Sign in!">
+                    <label for="exerciseDuration">Duration in minutes:</label>
+                    <input type="number" name="exerciseDuration" id="exerciseDuration">
                 </div>
-            </form>
+                <div>
+                    <label for="exerciseReps">Reps:</label>
+                    <input type="number" name="exerciseReps" id="exerciseReps">
+                </div>
+                <div>
+                    <label for="exerciseDate">Date:</label>
+                    <input type="date" name="exerciseDate" id="exerciseDate">
+                </div>
+                <div>
+                    <input type="button" name="exerciseBtn" id="exerciseBtn" value="Save">
+                </div>
+            </form> 
         </div>
     </body>
 </html>

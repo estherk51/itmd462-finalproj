@@ -5,7 +5,8 @@
         <title>Tracking</title>
         <link rel="stylesheet" type="text/css" href="./css/style.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">    </head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    </head>
     <body>
         <div class="navContainer">
             <img src="./images/scale_icon.png" alt="logo" class="logo">
@@ -13,25 +14,31 @@
                 <ul>
                     <li class="navbar"><a class="navlink" href="index.html">Home</a></li>
                     <li class="navbar"><a class="navlink" href="weight_track.html">Tracking</a></li>
-                    <li class="navbar"><a class="navlink" href="#">Exercises</a></li>
+                    <li class="navbar"><a class="navlink" href="exercises.html">Exercises</a></li>
                     <li class="navbar"><a class="navlink" href="login.html">Log In</a></li>
                 </ul>
             </nav>
         </div>
-        <div id="">
-            <p id="showProgress"></p>
-        </div>
-        <div id="">
-            <form class="trackForm" id="trackForm">
+        <div class="trackForm">
+            <form id="trackForm" method="GET" action="#">
                 <h2>Enter your weight!</h2>
-                <div>
-                    <label for="currentWeight">Weight</label>
-                    <input type="number" name="currentWeight" id="currentWeight">
+                <div class="inputWeight">
+                    <label for="initialWeight">Enter initial weight:</label>
+                    <input type="number" name="initialWeight" id="initialWeight">
+                    <p>lbs.</p>
+                </div>
+                <div class="inputWeight">
+                    <label for="goalWeight">Enter goal weight:</label>
+                    <input type="number" name="goalWeight" id="goalWeight">
+                    <p>lbs.</p>
                 </div>
                 <div>
-                    <label for="">
-                
+                    <input type="button" name="weightBtn" id="weightBtn" value="Save">
+                </div>
             </form>
+        </div>
+        <div class="">
+            <p id="showProgress"></p>
         </div>
     </body>
 </html>
