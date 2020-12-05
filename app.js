@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 const exerciseRoutes = require('./api/routes/exercise');
 const weight_trackRoutes = require('./api/routes/weight_track');
+const usersRoutes = require('./api/routes/users');
 
 mongoose.connect('mongodb+srv://ekim:' + process.env.MONGO_ATLAS_PW + 
     '@cluster0.zrkhj.mongodb.net/wta?retryWrites=true&w=majority', {
@@ -38,6 +39,7 @@ app.use('/scripts', express.static(__dirname + '/scripts'));
 
 app.use('/exercise', exerciseRoutes);
 app.use('/weight_track', weight_trackRoutes);
+app.use('/users', usersRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not Found');

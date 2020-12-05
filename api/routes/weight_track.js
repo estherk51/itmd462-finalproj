@@ -31,12 +31,13 @@ router.get('/', (req, res, next) => {
         });
 });
 
-// When creating a new post, only initial and goal weight is recorded
+// Creating new post
 router.post('/', (req, res, next) => {
     const weight_track = new Weight_track({
         _id: new mongoose.Types.ObjectId(),
         initial: req.body.initial,
-        goal: req.body.goal
+        goal: req.body.goal,
+        current: req.body.goal
     });
     weight_track
         .save()
@@ -77,7 +78,7 @@ router.get('/:weight_trackID', (req, res, next) => {
         })
         .catch(err => {
             console.log(err);
-            res.status(500).json({erro: err});
+            res.status(500).json({error: err});
         });
 });
 
@@ -121,7 +122,12 @@ router.delete('/:weight_trackID', (req, res, next) => {
                 }
             });
         })
-        .catch();
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
 });
 
 module.exports = router;

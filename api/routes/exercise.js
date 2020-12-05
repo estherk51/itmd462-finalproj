@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const router = express.Router();
 
 const Exercise = require('../models/exercise_model');
+const User = require('../models/user_model');
 
 router.get('/', (req, res, next) => {
     Exercise.find()
@@ -39,8 +40,23 @@ router.post('/', (req, res, next) => {
         reps: req.body.reps,
         date: req.body.date
     });
-    exercise
-        .save()
+    User.findById(req.body.userID)
+        .then(user => {
+            if(!user) {
+                return res.status(404).json({
+                    message: 'User not found'
+                })
+            } else {
+                const exercise = new Exercise({
+                    _id: new mongoose.Types.ObjectId(),
+                    name: req.body.name,
+                    duration: req.body.duration,
+                    reps: req.body.reps,
+                    date: req.body.date
+                });
+                return exercise.save();
+            }
+        })
         .then(result => {
             res.status(201).json({
                 message: 'Exercise successfully saved',
@@ -52,7 +68,7 @@ router.post('/', (req, res, next) => {
                 },
                 request: {
                     type: 'POST',
-                    url: 'http://localhost:3000/exercise'
+                    url: 'http://localhost:3000/exercise' + result._id
                 }
             });
         })
@@ -123,7 +139,12 @@ router.delete('/:exerciseID', (req, res, next) => {
                 }
             });
         })
-        .catch();
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
 });
 
 module.exports = router;

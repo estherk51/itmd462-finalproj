@@ -68,7 +68,7 @@ nav a {
     margin-bottom: 10px;
 }
 
-#loginBtn, #weightBtn, #exerciseBtn {
+#loginBtn, #weightBtn, #exerciseBtn, #showExercisesBtn {
     border-radius: 4px;
     background: #004BA8;
     width: 175px;
@@ -101,5 +101,10 @@ nav a {
     margin: 25px auto 0 auto;
     box-shadow: 5px 10px 10px black;
     padding: 5px 0px 30px 0px;
+    text-align: center;
+}
+
+.displayExercises {
+    margin: auto;
     text-align: center;
 }
