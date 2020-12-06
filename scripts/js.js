@@ -26,14 +26,16 @@ $(document).ready(function() {
     });
 });
 
+// Supposed to display on the html page, but at least it prints out on the console...
 function displayWeightRecord () {
     const weight_url = 'http://localhost:3000/weight_track/';
     $.get(weight_url, result => {
         $.each(result.weights, (i, item) => {
-            var eachrow = "<p>" + item.Weight_track.initial + "</p>"
-                        + "<p>" + item.Weight_track.goal + "</p>"
-                        + "<p>" + item.Weight_track.current + "</p>";
+            var eachrow = "<p>" + item.weight.initial + "</p>"
+                        + "<p>" + item.weight.goal + "</p>"
+                        + "<p>" + item.weight.current + "</p>";
             $('#showProgess').append(eachrow);
+            console.log(result);
         });
     });
 }
