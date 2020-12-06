@@ -33,13 +33,6 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    const exercise = new Exercise({
-        _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        duration: req.body.duration,
-        reps: req.body.reps,
-        date: req.body.date
-    });
     User.findById(req.body.userID)
         .then(user => {
             if(!user) {

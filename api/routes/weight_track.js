@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const router = express.Router();
 
 const Weight_track = require('../models/weight_track_model');
+const User = require('../models/user_model');
 
 router.get('/', (req, res, next) => {
     Weight_track.find()
@@ -16,7 +17,7 @@ router.get('/', (req, res, next) => {
                        weight: doc,
                        request: {
                            type: 'GET',
-                           url: 'http://localhost:3000/weight_track' + doc._id
+                           url: 'http://localhost:3000/weight_track/' + doc._id
                        }
                    }
                }) 
@@ -33,24 +34,33 @@ router.get('/', (req, res, next) => {
 
 // Creating new post
 router.post('/', (req, res, next) => {
-    const weight_track = new Weight_track({
-        _id: new mongoose.Types.ObjectId(),
-        initial: req.body.initial,
-        goal: req.body.goal,
-        current: req.body.goal
-    });
-    weight_track
-        .save()
+    User.findById(req.body.userID)
+        .then(user => {
+            if (!user) {
+                return res.status(404).json({
+                    message: 'User not found'
+                });
+            } else {
+                const weight_track = new Weight_track({
+                    _id: new mongoose.Types.ObjectId(),
+                    initial: req.body.initial,
+                    goal: req.body.goal,
+                    current: req.body.goal
+                });
+                return weight_track.save();
+            }
+        })
         .then(result => {
             res.status(201).json({
-                message: 'Initial weight and goal weight saved!',
-                createdWeight_track: {
+                message: 'Weight record successfully saved',
+                createdWeightTrack: {
                     initial: result.initial,
-                    goal: result.goal
+                    goal: result.goal,
+                    current: result.goal
                 },
                 request: {
                     type: 'POST',
-                    url: 'http://localhost:3000/weight_track'
+                    url: 'http://localhost:3000/weight_track/' + result._id
                 }
             });
         })
@@ -72,7 +82,7 @@ router.get('/:weight_trackID', (req, res, next) => {
                 weight_track: doc,
                 request: {
                     type: 'GET',
-                    url: 'http://localhost:3000/weight_track'
+                    url: 'http://localhost:3000/weight_track/'
                 }
             });
         })
@@ -96,7 +106,7 @@ router.patch('/:weight_trackID', (req, res, next) => {
                 message: 'Weight has been updated',
                 request: {
                     type: 'POST',
-                    url: 'http://localhost:3000/weight_track' + id
+                    url: 'http://localhost:3000/weight_track/' + id
                 }
             });
         })
@@ -117,7 +127,7 @@ router.delete('/:weight_trackID', (req, res, next) => {
                 message: 'Weight record deleted',
                 request: {
                     type: 'POST',
-                    url: 'http://localhost:3000/weight_track',
+                    url: 'http://localhost:3000/weight_track/',
                     body: { initial: 'Number', goal: 'Number'}
                 }
             });
