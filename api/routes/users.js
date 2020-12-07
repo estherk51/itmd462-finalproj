@@ -37,8 +37,7 @@ router.post('/', (req, res, next) => {
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         username: req.body.username,
-        email: req.body.email,
-        password: req.body.email
+        password: req.body.password
     });
     user
         .save()
@@ -48,7 +47,6 @@ router.post('/', (req, res, next) => {
                 createdUser: {
                     name: result.name,
                     username: result.username,
-                    email: result.email,
                     password: result.password
                 },
                 request: {

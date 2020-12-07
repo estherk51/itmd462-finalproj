@@ -68,7 +68,7 @@ nav a {
     margin-bottom: 10px;
 }
 
-#loginBtn, #weightBtn, #exerciseBtn, #showExercisesBtn {
+#loginBtn, #weightBtn, #exerciseBtn, #showExercisesBtn, #btn2 {
     border-radius: 4px;
     background: #004BA8;
     width: 175px;
@@ -107,4 +107,23 @@ nav a {
 .displayExercises {
     margin: auto;
     text-align: center;
+}
+
+.record-container {
+    width: 350px;
+    padding: 30px;
+    margin: 50px auto;
+    text-align: center;
+    background-color: white;
+    box-shadow: 5px 10px 10px black;
+    border-radius: 7px;;
+}
+
+table {
+    margin: auto;
+}
+th, td, tr {
+    margin: auto;
+    padding: 10px;
+
 }

@@ -42,6 +42,7 @@ router.post('/', (req, res, next) => {
             } else {
                 const exercise = new Exercise({
                     _id: new mongoose.Types.ObjectId(),
+                    userID: req.body.userID,
                     name: req.body.name,
                     duration: req.body.duration,
                     reps: req.body.reps,
@@ -54,6 +55,7 @@ router.post('/', (req, res, next) => {
             res.status(201).json({
                 message: 'Exercise successfully saved',
                 createdExercise: {
+                    userID: result.userID,
                     name: result.name,
                     duration: result.duration,
                     reps: result.reps,
