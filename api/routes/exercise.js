@@ -5,6 +5,8 @@ const router = express.Router();
 const Exercise = require('../models/exercise_model');
 const User = require('../models/user_model');
 
+const exerciseURL = 'http://localhost:3000/exercise/';
+
 router.get('/', (req, res, next) => {
     Exercise.find()
         .select('-__v')
@@ -17,7 +19,7 @@ router.get('/', (req, res, next) => {
                         exercise: doc,
                         request: {
                             type: 'GET',
-                            url: 'http://localhost:3000/exercise/' + doc._id
+                            url: exerciseURL + doc._id
                         }
                     }
                 })
@@ -62,8 +64,8 @@ router.post('/', (req, res, next) => {
                     date: result.date
                 },
                 request: {
-                    type: 'POST',
-                    url: 'http://localhost:3000/exercise' + result._id
+                    type: 'GET',
+                    url: exerciseURL + result._id
                 }
             });
         })
@@ -85,7 +87,7 @@ router.get('/:exerciseID', (req, res, next) => {
                 exercise: doc,
                 request: {
                     type: 'GET',
-                    url: 'http://localhost:3000/exercise'
+                    url: exerciseURL
                 }
             });
         })
@@ -108,7 +110,7 @@ router.patch('/:exerciseID', (req, res, next) => {
                 message: 'Exercise updated',
                 request: {
                     type: 'GET',
-                    url: 'http://localhost:3000/exercise' + id
+                    url: exerciseURL + id
                 }
             });
         })
@@ -129,7 +131,7 @@ router.delete('/:exerciseID', (req, res, next) => {
                 message: 'Exercise deleted',
                 request: {
                     type: 'POST',
-                    url: 'http://localhost:3000/exercise',
+                    url: exerciseURL,
                     body: { name: 'String', date: 'String'}
                 }
             });

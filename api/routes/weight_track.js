@@ -110,7 +110,7 @@ router.patch('/:weight_trackID', (req, res, next) => {
             res.status(200).json({
                 message: 'Weight has been updated',
                 request: {
-                    type: 'POST',
+                    type: 'GET',
                     url: wtUrl + id
                 }
             });
