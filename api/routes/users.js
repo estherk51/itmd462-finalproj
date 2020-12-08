@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
                         user: doc,
                         request: {
                             type: 'GET',
-                            url: 'http://localhost:3000/users' + doc._id
+                            url: 'http://localhost:3000/users/' + doc._id
                         }
                     }
                 })
@@ -50,8 +50,8 @@ router.post('/', (req, res, next) => {
                     password: result.password
                 },
                 request: {
-                    type: 'POST',
-                    url: 'http://localhost:3000/users'
+                    type: 'GET',
+                    url: 'http://localhost:3000/users/'
                 }
             });
         })
@@ -73,7 +73,7 @@ router.get('/:userID', (req, res, next) => {
                 user: doc,
                 request: {
                     type: 'GET',
-                    url: 'http://localhost:3000/users'
+                    url: 'http://localhost:3000/users/'
                 }
             });
         })
@@ -95,8 +95,8 @@ router.patch('/:userID', (req, res, next) => {
             res.status(200).json({
                 message: 'User has been updated',
                 request: {
-                    type: 'POST',
-                    url: 'http://localhost:3000/users' + id
+                    type: 'GET',
+                    url: 'http://localhost:3000/user/' + id
                 }
             });
         })
@@ -116,12 +116,11 @@ router.delete('/:userID', (req, res, next) => {
             res.status(200).json({
                 message: 'Account has been deleted',
                 request: {
-                    type: 'POST',
-                    url: 'http://localhost:3000/users',
+                    type: 'GET',
+                    url: 'http://localhost:3000/users/',
                     body: {
                         name: 'String', 
                         username: 'String',
-                        email: 'String',
                         password: 'String'
                     }
                 }

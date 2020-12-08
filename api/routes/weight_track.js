@@ -98,22 +98,32 @@ router.get('/:weight_trackID', (req, res, next) => {
 });
 
 // This is where user can edit their current weight
+// This makes sure there is a weight_track record first
 router.patch('/:weight_trackID', (req, res, next) => {
     const id = req.params.weight_trackID;
     const updateOps = {};
     for(const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     };
-    Weight_track.updateOne({_id: id}, {$set: updateOps})
-        .exec()
-        .then(result => {
-            res.status(200).json({
-                message: 'Weight has been updated',
-                request: {
-                    type: 'GET',
-                    url: wtUrl + id
-                }
-            });
+    Weight_track.findById(id)
+        .then(record => {
+            if(!record) {
+                return res.status(404).json({
+                    message: 'Record not found'
+                });
+            } else {
+                Weight_track.updateOne({_id: id}, {$set: updateOps})
+                    .exec()
+                    .then(result => {
+                        res.status(200).json({
+                            message: 'Weight has been updated',
+                            request: {
+                                type: 'GET',
+                                url: wtUrl + id
+                            }
+                        });
+                    })
+            }
         })
         .catch(err => {
             console.log(err);

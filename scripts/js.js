@@ -26,17 +26,10 @@ $(document).ready(function() {
     });
 });
 
-// Supposed to display on the html page, but at least it prints out on the console...
+// gets all the records ...trying to figure out a way to just get specified record...
 const weight_url = 'http://localhost:3000/weight_track/';
 function displayWeightRecord () {
     $.get(weight_url, result => {
-        // $.each(result.weights, (i, item) => {
-        //     var eachrow = "<p>" + item.weight.initial + "</p>"
-        //                 + "<p>" + item.weight.goal + "</p>"
-        //                 + "<p>" + item.weight.current + "</p>";
-        //     $('#showProgess').append(eachrow);
-        //     console.log(result);
-        // });
         $('#tbody tr').remove();
             $.each(result.weights, (i, item) => {
                 var eachrow = "<tr>"
@@ -60,7 +53,27 @@ function postWeight() {
         document.getElementById('goalWeight').value,
         document.getElementById('currentWeight').value
     );
+    console.log(newWeight);
     // $.post(weight_url, newWeight, result =>{
 
     // });
+}
+
+// I have no idea how to post with jQuery/ajax...
+function newUser() {
+    document.getElementById("signup").addEventListener("click", function(event) {
+        event.preventDefault()
+    });
+
+    var newUser = new User(
+        document.getElementById('newName').value,
+        document.getElementById('newUsername').value,
+        document.getElementById('newPassword').value
+    );
+
+    // this should let the user post, but it is not working...
+    // the alert does not even appear
+    $.post('http://localhost:3000/users', newUser, result => {
+        console.log(result);
+    });
 }
