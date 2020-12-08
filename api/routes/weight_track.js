@@ -99,6 +99,7 @@ router.get('/:weight_trackID', (req, res, next) => {
 
 // This is where user can edit their current weight
 // This makes sure there is a weight_track record first
+// I have to fix some inconsistencies with naming when I get a chance...
 router.patch('/:weight_trackID', (req, res, next) => {
     const id = req.params.weight_trackID;
     const updateOps = {};
@@ -135,17 +136,26 @@ router.patch('/:weight_trackID', (req, res, next) => {
 
 router.delete('/:weight_trackID', (req, res, next) => {
     const id = req.params.weight_trackID;
-    Weight_track.deleteOne({_id: id})
-        .exec()
-        .then(result => {
-            res.status(200).json({
-                message: 'Weight record deleted',
-                request: {
-                    type: 'POST',
-                    url: wtUrl,
-                    body: { initial: 'Number', goal: 'Number'}
-                }
-            });
+    Weight_track.findById(id)
+        .then(record => {
+            if(!record) {
+                res.status(404).json({
+                    message: 'Record not found'
+                });
+            } else {
+                Weight_track.deleteOne({_id: id})
+                    .exec()
+                    .then(result => {
+                        res.status(200).json({
+                            message: 'Weight record deleted',
+                            request: {
+                                type: 'GET',
+                                url: wtUrl,
+                                body: { initial: 'Number', goal: 'Number'}
+                            }
+                        });
+                    })
+            }
         })
         .catch(err => {
             console.log(err);
